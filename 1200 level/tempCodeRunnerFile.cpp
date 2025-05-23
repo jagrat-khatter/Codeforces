@@ -1,2 +1,1 @@
-for(auto i : mn) cout << i << ' ';
-        // cout << '\n';
+a-p
