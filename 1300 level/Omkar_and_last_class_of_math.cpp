@@ -19,3 +19,15 @@ signed main()
                 s.insert(i);
             }
         }
+        if(s.size()!=0){
+            ll lst = *(--s.end());
+            cout << lst << ' ' << n-lst << '\n';
+        }
+        else{
+            cout << 1 << ' ' << n-1 << '\n';
+        }
+
+    }
+
+    return 0;
+}
