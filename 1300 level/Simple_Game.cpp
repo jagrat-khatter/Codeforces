@@ -25,14 +25,15 @@ signed main()
     cin.tie(NULL);
 
     ll m,n; cin >> n >> m;
-    if(n%2==0){
+    if (n==1) cout << 1 << '\n';
+    else if(n%2==0){
         if(m<=(n/2)) cout << m+1 << '\n';
         else if(m>=((n/2)+1)) cout << m-1 << '\n';
     }
     else {
         ll ceil =(n+2-1) / 2 ;
         
-        if(m==ceil) cout << m+1 << '\n';
+        if(m==ceil) cout << m-1 << '\n';
         else if(m>ceil) cout << m-1 <<'\n';
         else if(m<ceil) cout << m+1 << '\n';
     }
