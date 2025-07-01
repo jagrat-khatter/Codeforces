@@ -25,25 +25,23 @@ signed main()
     cin.tie(NULL);
 
     ll t; cin >> t;
-    while(t--){
-        string s; cin >> s;
-        ll n= s.size();
-        vector<ll> v;
-        for(auto i : s) {
-            ll num = i - 48;
-            v.push_back(num);
+    while(t--)
+    {
+        ll n,j,k; cin >> n >>  j >> k;
+        ll mx= lmin;
+        vector<ll> v(n);
+        for(auto &i: v){
+            cin >> i;
+            if(i>mx) mx=i;
         }
-        ll ans=0 , fg=0;
-        for(ll i=n-1;i>=0;i--){
-            if(fg==0){
-                if(v[i]==0) ans++;
-                else fg=1;
-            }
-            else{
-                if(v[i]!=0) ans++;
-            }
+        
+        if(v[j-1]==mx){
+            cout << "YES" << '\n';
         }
-        cout << ans << '\n';
+        else {
+            if(k>=2) cout <<"YES" << '\n';
+            else cout << "NO" << '\n';
+        }
     }
     
     

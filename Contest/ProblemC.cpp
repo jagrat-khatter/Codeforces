@@ -25,32 +25,35 @@ signed main()
     cin.tie(NULL);
 
     ll t; cin >> t;
-    while(t--){
-        ll x,k ; cin >> x >>k;
-        if(x==1 && k==1) {cout << "NO" << '\n'; continue;}
-        if(x==1){
-            ll n=0 , fg=0;
-            for(ll i=k;i>=1;i--){
-                n += power(10 , i-1);
+    while(t--)
+    {
+        ll  n; cin >> n;
+        vector<ll> v(n);
+        set<ll> s1,s2;
+        ll mx=lmin,mn=lmax;
+        for(auto &i : v) {cin >> i; s1.insert(i);
+        mx = max(mx , i);
+        mn = min(mn , i);}
+        
+        string s;
+        for(ll i=0;i<n;i++){
+            s1.erase(v[i]);
+
+            if(i==0 || i==n-1 || v[i]==mx || v[i]==mn) s.push_back('1');
+            else{
+                ll s1max = *(--s1.end());
+                ll s2min = *(s2.begin());
+            //cout << s1max << ' ' << s2min << '\n';
+                if(v[i]>s1max && v[i]<s2min) s.push_back('1');
+                else if(v[i]>s1max && v[i]>s2min) s.push_back('1');
+                else if(v[i]<s1max && v[i]<s2min) s.push_back('1');
+                else s.push_back('0');
             }
-            //cout << n << '\n';
-            for(ll i=2;i*i<=n;i++){
-                if(n%i==0) {fg=1; break;}
-            }
-            if(!fg) cout << "YES" << '\n';
-            else cout << "NO" << '\n';
+            
+            s2.insert(v[i]);
         }
-        else if(k==1){
-            ll fg=0;
-            for(ll i=2;i*i<=x;i++){
-                if(x%i==0) {fg=1; break;}
-            }
-            if(!fg) cout << "YES" << '\n';
-            else cout << "NO" << '\n';
-        }
-        else{
-            cout << "NO" << '\n';
-        }
+
+        cout << s << '\n';
     }
     
     
