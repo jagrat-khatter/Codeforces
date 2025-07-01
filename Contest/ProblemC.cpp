@@ -25,51 +25,34 @@ signed main()
     cin.tie(NULL);
 
     ll t; cin >> t;
-    while(t--)
-    {
-        ll n,m; cin >> n >> m;
-        if(n*(n+1) /2 < m || m<n) {cout << -1 << '\n'; continue;}
-        vector<ll> v;
-        for(ll i=1;i<=n;i++)
-        {
-            if(i==1) v.push_back(n-i+1);
-            else v.push_back(v[v.size()-1] + n-i+1);
-        }
-        ll l=0-1 , r=v.size()-1+1;
-        while(r-1 > l)
-        {
-            ll mid = (l+r) /2;
-            if(v[mid] <= m) l = mid;
-            else r = mid;
-        }
-        // for(auto i : v) cout << i <<  ' ';
-        // cout << '\n';
-        // index l tak 0 se reverse counting
-        vector<ll> final;
-        for(ll j=n;j>=n-l+1;j--){
-            final.push_back(j);
-        }
-        if(v[l] == m){
-            ll j=1;
-            while(1 && final.size()!=n){
-                final.push_back(j);
-                j++;
+    while(t--){
+        ll x,k ; cin >> x >>k;
+        if(x==1 && k==1) {cout << "NO" << '\n'; continue;}
+        if(x==1){
+            ll n=0 , fg=0;
+            for(ll i=k;i>=1;i--){
+                n += power(10 , i-1);
             }
+            //cout << n << '\n';
+            for(ll i=2;i*i<=n;i++){
+                if(n%i==0) {fg=1; break;}
+            }
+            if(!fg) cout << "YES" << '\n';
+            else cout << "NO" << '\n';
+        }
+        else if(k==1){
+            ll fg=0;
+            for(ll i=2;i*i<=x;i++){
+                if(x%i==0) {fg=1; break;}
+            }
+            if(!fg) cout << "YES" << '\n';
+            else cout << "NO" << '\n';
         }
         else{
-            ll diff = m - v[l] + 1;
-            final.push_back(diff);
-            ll j=1;
-            while(1 && final.size()!=n){
-                if(j!=diff) final.push_back(j);
-                j++;
-            }
-        }
-        cout << final[0] << '\n';
-        for(ll i=0;i<final.size();i++){
-            if(i!=0) cout << final[i] << ' ' << final[i-1] << '\n';
+            cout << "NO" << '\n';
         }
     }
+    
     
 
     return 0;

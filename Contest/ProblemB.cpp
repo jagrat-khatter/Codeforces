@@ -24,28 +24,28 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    ll t  ;cin >> t;
-    while(t--)
-    {
-        ll n,s ; cin >> n >> s;
-        ll ans=0;
-        for(ll i=0;i<n;i++){
-            ll dx , dy , x , y; cin >> dx >> dy >> x >>   y;
-            // now test for(0,s) , (s , 0)
-            ll fg=0;
-            ll px = 0 , py = 0;
-            if((px-x)/dx == (py-y)/dy)  fg=1;
-            px=0; py=s;
-            if((px-x)/dx == (py-y)/dy)  fg=1;
-            px=s; py=0;
-            if((px-x)/dx == (py-y)/dy)  fg=1;
-            px=s; py=s;
-            if((px-x)/dx == (py-y)/dy)  fg=1;
-
-            if(fg==1) ans ++;
+    ll t; cin >> t;
+    while(t--){
+        string s; cin >> s;
+        ll n= s.size();
+        vector<ll> v;
+        for(auto i : s) {
+            ll num = i - 48;
+            v.push_back(num);
+        }
+        ll ans=0 , fg=0;
+        for(ll i=n-1;i>=0;i--){
+            if(fg==0){
+                if(v[i]==0) ans++;
+                else fg=1;
+            }
+            else{
+                if(v[i]!=0) ans++;
+            }
         }
         cout << ans << '\n';
     }
+    
     
 
     return 0;

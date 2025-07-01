@@ -24,13 +24,7 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    ll t; cin >> t;
-    while(t--)
-    {
-        ll n; cin >> n;
-        if(n%2==0) cout << "NO" << '\n';
-        else cout << "YES" << '\n';
-    }
+    
     
     
 
