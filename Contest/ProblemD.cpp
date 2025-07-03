@@ -24,19 +24,7 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    ll t; cin >> t;
-    while(t--)
-    {
-        ll n,k; cin >> n >> k;
-        string s; cin >> s;
-        ll ct1=0;
-        for(auto i : s){
-            if(i=='1') ct1++;
-        }
-        if(ct1 <= k) cout << "Alice" << '\n';
-        else if(k >= (n/2)+1) cout << "Alice" << '\n';
-        else cout << "Bob" << '\n'; 
-    }
+    
     
     
 

@@ -27,12 +27,14 @@ signed main()
     ll t; cin >> t;
     while(t--)
     {
-        ll n; cin >> n;
-        if(n<=3) cout << "Alice" << '\n';
-        else{
-            if((n-1-3) % 4 == 0) cout << "Bob" << '\n';
-            else cout << "Alice" << '\n';
+        ll n,k; cin >>  n >> k;
+        string s;
+        for(ll i=1;i<=n;i++){
+            if(i<=k) s.push_back('1');
+            else s.push_back('0');
         }
+
+        cout << s << '\n';
     }
     
     

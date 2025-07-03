@@ -27,21 +27,16 @@ signed main()
     ll t; cin >> t;
     while(t--)
     {
-        ll n,j,k; cin >> n >>  j >> k;
-        ll mx= lmin;
-        vector<ll> v(n);
-        for(auto &i: v){
-            cin >> i;
-            if(i>mx) mx=i;
+        ll n; cin >> n;
+        ll k = ((n+2-1)/2) ; // ceil of n/2
+
+        cout << 2*n-1 << '\n';
+        for(ll i=1;i<=n;i++){
+            cout << i << ' ' << 1 << ' ' << i << '\n';
+            if(i!=n) cout << i << ' ' << i+1 << ' ' << n << '\n';
         }
-        
-        if(v[j-1]==mx){
-            cout << "YES" << '\n';
-        }
-        else {
-            if(k>=2) cout <<"YES" << '\n';
-            else cout << "NO" << '\n';
-        }
+    
+
     }
     
     
