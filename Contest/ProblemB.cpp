@@ -28,16 +28,29 @@ signed main()
     while(t--)
     {
         ll n; cin >> n;
-        ll k = ((n+2-1)/2) ; // ceil of n/2
-
-        cout << 2*n-1 << '\n';
-        for(ll i=1;i<=n;i++){
-            cout << i << ' ' << 1 << ' ' << i << '\n';
-            if(i!=n) cout << i << ' ' << i+1 << ' ' << n << '\n';
+        string st; cin >> st;
+        
+        set<char> s;
+        map<char , ll> mp;
+        for(auto i : st){
+            mp[i]++;
+            s.insert(i);
         }
-    
+        ll fg=0;
+        for(ll i=1;i<st.size()-1;i++){
+            char e = st[i];
+            mp[e]--;
+            if(mp[e]==0) s.erase(e);
+            if(s.find(e) != s.end()) fg=1;
 
+            mp[e]++;
+            s.insert(e);
+        }
+
+        if(fg) cout << "YES" << '\n';
+        else cout << "NO" << '\n';
     }
+
     
     
 

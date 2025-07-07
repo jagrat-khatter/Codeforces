@@ -12,6 +12,10 @@ ll min(ll a,ll b)
     if(a>b) return b;
     else return a;
 }
+ll mod(ll n){
+    if(n>0) return n;
+    else return -n;
+}
 ll power(ll b,ll e){
     if(e==0) return 1;
 
@@ -27,14 +31,22 @@ signed main()
     ll t; cin >> t;
     while(t--)
     {
-        ll n,k; cin >>  n >> k;
-        string s;
-        for(ll i=1;i<=n;i++){
-            if(i<=k) s.push_back('1');
-            else s.push_back('0');
+        ll n,s; cin >> n >> s;
+        vector<ll> v(n);
+        ll mx=lmin , mn = lmax;
+        for(auto &i : v) {cin >> i;
+        mx = max(mx , i);
+        mn = min(mn , i);
         }
+        if(s<=mn){
+            cout << mx-s << '\n';
+        }
+        else if(s>=mx) cout << mod(mn-s) << '\n';
+        else {ll res1 = mod(mx-s);
+        ll res2 = mod(mn-s);
+        cout << min(res1 , res2) * 2  + max(res1 , res2) << '\n';}
 
-        cout << s << '\n';
+
     }
     
     
