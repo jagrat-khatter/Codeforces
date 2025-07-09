@@ -19,39 +19,33 @@ ll power(ll b,ll e){
     if(e%2==0) return value * value;
     else return value * value * b;
 }
+ll mod(ll n){
+    if(n>=0) return n;
+    else return -n;
+}
 signed main()
 {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
     ll t; cin >> t;
-    while(t--)
-    {
+    while(t--){
         ll n; cin >> n;
-        string st; cin >> st;
+        long double px,py,qx,qy; cin >> px >> py >> qx >> qy;
+        vector<long double> v(n);
+        long double rsum=0, mx=lmin;
+        for(auto &i : v) {cin >> i;}
         
-        set<char> s;
-        map<char , ll> mp;
-        for(auto i : st){
-            mp[i]++;
-            s.insert(i);
+        long double dist = sqrt((px-qx)*(px-qx) + (py-qy)*(py-qy)) ;
+        v.push_back(dist) ;
+        for(auto i : v){
+            rsum += i;
+            mx = max(mx , i);
         }
-        ll fg=0;
-        for(ll i=1;i<st.size()-1;i++){
-            char e = st[i];
-            mp[e]--;
-            if(mp[e]==0) s.erase(e);
-            if(s.find(e) != s.end()) fg=1;
-
-            mp[e]++;
-            s.insert(e);
-        }
-
-        if(fg) cout << "YES" << '\n';
-        else cout << "NO" << '\n';
+        if(mx > rsum - mx) cout << "NO" << '\n';
+        else cout << "YES" << '\n' ;
+        
     }
-
-    
     
 
     return 0;

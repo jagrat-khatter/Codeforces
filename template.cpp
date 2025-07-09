@@ -19,12 +19,15 @@ ll power(ll b,ll e){
     if(e%2==0) return value * value;
     else return value * value * b;
 }
+ll mod(ll n){
+    if(n>=0) return n;
+    else return -n;
+}
 signed main()
 {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    
     
     
 
