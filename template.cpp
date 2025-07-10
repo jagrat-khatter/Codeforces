@@ -25,11 +25,18 @@ ll mod(ll n){
 }
 signed main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
+    // ios::sync_with_stdio(false);
+    // cin.tie(NULL);
 
-    
-    
+    while(true){
+        ll n; cin >> n;
+        ll l=0;
 
+        while(n>>l){// to calaculate the index of last 1 bit
+            l++;
+        }
+        cout << ((~n)&((1<<l)-1)) << '\n';
+    }
+    
     return 0;
 }
