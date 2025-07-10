@@ -16,8 +16,6 @@ signed main(){
 
         if(px==x) smx++;
         else  slp.insert((y-py)/(x-px));
-            
-        
     }
     cout << slp.size() + (ll)(smx!=0)<< '\n';
 
