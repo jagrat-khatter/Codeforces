@@ -1,1 +1,3 @@
-for(auto i : a) cout << i << ' ';
+for(ll j=0;j<32;j++){
+        //         cout << mp[j] << '\n';
+        //     }

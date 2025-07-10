@@ -28,6 +28,17 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
+    ll t;cin >> t;
+    while(t--){
+        ll n; cin >> n;
+        ll mul =1 ;
+        while(mul<=n){
+            mul *= 2;
+        }
+        mul = mul/2;
+        cout << max(n - mul +1 , mul/2)<< '\n';
+    }
+
     
     return 0;
 }
