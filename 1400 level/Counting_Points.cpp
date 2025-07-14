@@ -23,14 +23,6 @@ ll mod(ll n){
     if(n>=0) return n;
     else return -n;
 }
-ll gcd(ll a,ll b){
-    if(b==0) return a;
-
-    return gcd(b , a%b) ;
-}
-ll lcm(ll a,ll b){
-    return (a*b) / gcd(a,b);
-}
 signed main()
 {
     ios::sync_with_stdio(false);
@@ -38,21 +30,29 @@ signed main()
 
     ll t; cin >> t;
     while(t--){
-        ll n; cin >> n;
-        vector<ll> v(n);
-        set<ll> s; map<ll ,ll> mp;
-        for(auto &i : v) {cin >> i;
-            s.insert(i);
-            mp[i]++;
-        }
-        ll ans=1;
-        for(ll i=0;i<n-1;i++){
-            if(v[i+1]%v[i] != 0){
-                ll x= v[i] / (gcd(v[i] , v[i+1])) ;
-                ans = lcm(ans , x);
+        ll n,m; cin >> n >> m;
+        set<ll> xc;
+        map<ll,ll> mp;
+        vector<ll> xv(n),rv(n);
+        for(auto &i : xv) cin >> i;
+        for(auto &i : rv) cin >> i;
+
+        for(ll i=0;i<n;i++){
+            ll x=xv[i] , r = rv[i];
+            for(double long j =x-r;j<=x+r;j++){
+                xc.insert(j);
+                double long yc = sqrt(r*r - (j-x)*(j-x));
+                mp[j] = max(mp[j] , (ll)(yc));
             }
         }
+
+        ll ans=0;
+        for(auto i : xc){
+            // cout << i << ' ' << mp[i]  << '\n';
+            ans += 2 * mp[i] + 1;
+        }
         
+
         cout << ans << '\n';
     }
     

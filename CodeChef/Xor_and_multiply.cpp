@@ -17,7 +17,7 @@ signed main()
     ll t; cin >> t;
     while(t--){
         ll n,a,b; cin >> n >> a >> b;
-        // first we need to calculate on going from 0 to n-1 indexed bit the number of bits 
+        // first we neefd to calculate on going rom 0 to n-1 indexed bit the number of bits 
         // where bitofA != bitofB
         ll diff =0;
         for(ll i=0;i<n;i++){

@@ -30,20 +30,19 @@ signed main()
 
     ll t; cin >> t;
     while(t--){
-        ll a,b,x,y; cin >> a >> b >> x >> y;
-        if(b>=a){
-            ll cst =0 ;
-            for(ll i=a;i<b;i++){
-                if(i%2!=0)  cst += x;
-                else cst += min(x,y);
+        ll n; cin >> n; 
+        vector<ll> v(n);
+        for(auto &i : v) cin >> i;
+        ll fg=0;
+        for(ll i=1;i<n;i++){
+            if(v[i]<v[i-1]){
+                cout << "YES" << '\n' <<2 << '\n' << v[i-1] << ' ' << v[i] << '\n'; fg=1; break;
             }
-            cout << cst << '\n';
-        }else{
-            if(a-b==1 && a%2!=0) cout << y << '\n';
-            else cout << -1 << '\n';
         }
+
+        if(!fg) cout << "NO" << '\n';
     }
     
-
+    
     return 0;
 }

@@ -25,18 +25,25 @@ ll mod(ll n){
 }
 signed main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
+    // ios::sync_with_stdio(false);
+    // cin.tie(NULL);
 
-    ll t;cin >> t;
+    
+
+
+    ll t; cin >> t;
     while(t--){
-        ll n; cin >> n;
-        vector<ll> v(n);
-        for(auto &i : v) cin >> i;
-        if(v[0]>v[1]){
-            cout << v[0] + v[1] << '\n';
+        ll n;cin >> n;
+        ll i,j,k; i=1;j=2;k=3;
+        while(1){
+            cout << "? " << i << ' ' << j << ' ' << k << '\n';
+            ll id ; cin >> id;
+            if(id == 0) {cout <<"!"<< ' ' << i << ' ' << j << ' ' << k << '\n'; break;}
+            long double a = (long double)(rand()) / RAND_MAX;
+            if(a<=0.3333333) i=id;
+            else if(a<=0.666666666) j=id;
+            else k=id;
         }
-        else cout << v[0] + v[0] << '\n';
     }
     
     
