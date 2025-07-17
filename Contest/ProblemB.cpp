@@ -28,15 +28,32 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    ll t;cin >> t;
+    ll t; cin >> t;
     while(t--){
-        ll n; cin >> n;
+        ll n,k; cin >> n >> k;
         vector<ll> v(n);
         for(auto &i : v) cin >> i;
-        if(v[0]>v[1]){
-            cout << v[0] + v[1] << '\n';
+        vector<ll> nz;
+        for(ll i=0;i<n;i++){
+            if(i==0){
+                if(v[i]==0) nz.push_back(0+1);
+                else nz.push_back(0+0);
+            }
+            else{
+                if(v[i]==0) nz.push_back(nz[i-1]+1);
+                else nz.push_back(nz[i-1]+0);
+            }
         }
-        else cout << v[0] + v[0] << '\n';
+        ll ans=0;
+        // for(auto j : nz) cout << j << ' ';
+        // cout << '\n';
+        for(ll i=0;i<=n-k;i++){
+            if(k-1!=0 && (nz[i+k-1] - nz[i] == k-1) && v[i]==0 && v[i+k-1]==0) {ans++;i+=k;}
+            else if(k-1==0 && v[i]==0) {ans++; i+=k;}
+            
+        }
+
+        cout << ans << '\n';
     }
     
     

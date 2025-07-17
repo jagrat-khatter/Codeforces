@@ -23,14 +23,6 @@ ll mod(ll n){
     if(n>=0) return n;
     else return -n;
 }
-ll gcd(ll a,ll b){
-    if(b==0) return a;
-
-    return gcd(b , a%b) ;
-}
-ll lcm(ll a,ll b){
-    return (a*b) / gcd(a,b);
-}
 signed main()
 {
     ios::sync_with_stdio(false);
@@ -38,22 +30,36 @@ signed main()
 
     ll t; cin >> t;
     while(t--){
-        ll n; cin >> n;
-        vector<ll> v(n);
-        set<ll> s; map<ll ,ll> mp;
-        for(auto &i : v) {cin >> i;
-            s.insert(i);
-            mp[i]++;
+        ll n,k ; cin >> n >> k;
+        set<ll> s;
+        ll crh =0;
+        for(ll i=0;i<n;i++){
+            ll x; cin >> x;
+            if(i==k-1) crh = x;
+            s.insert(x);
         }
-        ll ans=1;
-        for(ll i=0;i<n-1;i++){
-            if(v[i+1]%v[i] != 0){
-                ll x= v[i] / (gcd(v[i] , v[i+1])) ;
-                ans = lcm(ans , x);
+        vector<ll> v;
+        for(auto i : s) v.push_back(i);
+        ll id=0;
+        while(v[id]!=crh){
+            id++;
+        }
+        // for(auto i : v) cout << i << ' ';
+        // cout << '\n';
+        ll crwl = 1 , fg=0;
+        for(ll i=id;i<v.size();i++){
+            //cout << i << ' ' << v[i] << ' ' << v[i+1] <<' ' <<crwl << '\n';
+            if(i!=v.size()-1 && (v[i] - crwl+1 >= v[i+1]-v[i])){
+                crwl += v[i+1]-v[i];
             }
+            else if(i!=v.size()-1){
+                fg=1; break;
+            }
+            //cout << crwl << '\n';
         }
         
-        cout << ans << '\n';
+        if(fg) cout << "NO" << '\n';
+        else cout << "YES" << '\n' ;
     }
     
     

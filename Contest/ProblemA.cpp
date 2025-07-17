@@ -3,21 +3,24 @@ using namespace std;
 using ll = long long;
 const ll lmin = LLONG_MIN;
 const ll lmax = LLONG_MAX;
-ll max(ll a, ll b){
+ll power(ll b,ll e){
+    if(e==0) return 1;
+    ll value = power(b,e/2);
+    if(e%2==0) return value*value;
+    else return value*value*b;
+}
+ll gcd(ll a,ll b){
+    if(b==0) return a;
+
+    else return (b , b%a);
+}
+ll max(ll a,ll b){
     if(a>b) return a;
     else return b;
 }
-ll min(ll a,ll b)
-{
+ll min(ll a,ll b){
     if(a>b) return b;
     else return a;
-}
-ll power(ll b,ll e){
-    if(e==0) return 1;
-
-    ll value = power(b , e/2);
-    if(e%2==0) return value * value;
-    else return value * value * b;
 }
 ll mod(ll n){
     if(n>=0) return n;
@@ -30,19 +33,17 @@ signed main()
 
     ll t; cin >> t;
     while(t--){
-        ll n; cin >> n; 
-        vector<ll> v(n);
-        for(auto &i : v) cin >> i;
-        ll fg=0;
-        for(ll i=1;i<n;i++){
-            if(v[i]<v[i-1]){
-                cout << "YES" << '\n' <<2 << '\n' << v[i-1] << ' ' << v[i] << '\n'; fg=1; break;
-            }
+        ll n; cin >>n;
+        set<ll> s;
+        ll cp = n;
+        while(cp){
+            s.insert(cp%10);
+            cp = cp/10;
         }
-
-        if(!fg) cout << "NO" << '\n';
+        cout << *(s.begin()) << '\n';
     }
+
     
-    
+
     return 0;
 }
