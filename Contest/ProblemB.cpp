@@ -30,30 +30,57 @@ signed main()
 
     ll t; cin >> t;
     while(t--){
-        ll n,k; cin >> n >> k;
+        ll n , mx=lmin; cin >> n;
         vector<ll> v(n);
-        for(auto &i : v) cin >> i;
-        vector<ll> nz;
-        for(ll i=0;i<n;i++){
-            if(i==0){
-                if(v[i]==0) nz.push_back(0+1);
-                else nz.push_back(0+0);
-            }
-            else{
-                if(v[i]==0) nz.push_back(nz[i-1]+1);
-                else nz.push_back(nz[i-1]+0);
-            }
+        map<ll,ll> mp;
+         
+        for(auto & i : v) {cin >> i;}
+        sort(v.begin() , v.end());
+        ll gmx = v[n-1];// v.pop_back() ;
+        for(auto i : v) {mp[i]++;mx = max(mx , i);}
+         
+        vector<ll> fq(1e5+1);
+        for(ll j=mx;j>=0;j--){
+            if(j==mx) fq[j]=mp[j];
+            else fq[j]=fq[j+1]+mp[j];
         }
+        // cout << mx <<' ' <<gmx << '\n' ;
+        // for(ll i=0;i<=mx;i++) {
+        //     cout << fq[i] << ' ';
+        // }
+        // for(auto i : v) cout << i << ' ';
+        // cout << '\n' ;
         ll ans=0;
-        // for(auto j : nz) cout << j << ' ';
-        // cout << '\n';
-        for(ll i=0;i<=n-k;i++){
-            if(k-1!=0 && (nz[i+k-1] - nz[i] == k-1) && v[i]==0 && v[i+k-1]==0) {ans++;i+=k;}
-            else if(k-1==0 && v[i]==0) {ans++; i+=k;}
-            
+        for(ll i=0;i<v.size();i++){
+            for(ll j=i+1;j<v.size();j++){
+                ll sum = v[i]+v[j];
+                
+                // now the last element should be greater than gmx-sum and less than sum
+                ll l=j+1-1 , r=v.size()-1+1;
+                ll req = gmx - sum ;
+                while(r-1>l){
+                    ll mid = (l+r)/2;
+                    if(v[mid]<=req) l=mid;
+                    else if(v[mid]>req) r=mid;
+                }// take r from this 
+                
+                ll l2=j+1-1 , r2=v.size()-1+1;
+                ll req2 = sum;
+                while(r2-1>l2){
+                    ll mid = (l2+r2)/2;
+                    if(v[mid]<req2) l2=mid;
+                    else if(v[mid]>=req2) r2=mid;
+                }// take l2 from this 
+                
+                //cout <<i << ' ' << j << ' ' <<  r << ' ' << l2 << '\n'; 
+                if(l2>=r) ans+= l2-r+1 ;
+                //if(i==0 && j==1) break;
+            }
+            //if(i==0) break;
         }
 
-        cout << ans << '\n';
+        cout << ans << '\n' ;
+        
     }
     
     

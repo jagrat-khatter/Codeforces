@@ -33,14 +33,14 @@ signed main()
 
     ll t; cin >> t;
     while(t--){
-        ll n; cin >>n;
-        set<ll> s;
-        ll cp = n;
-        while(cp){
-            s.insert(cp%10);
-            cp = cp/10;
+        ll a,x,y; cin >> a >> x >> y;
+        if(x > y){
+            x = x+y;
+            y = x-y;
+            x = x-y;
         }
-        cout << *(s.begin()) << '\n';
+        if(a>=x && a<=y) cout << "NO" << '\n';
+        else cout << "YES" << '\n' ;
     }
 
     
