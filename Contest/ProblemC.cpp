@@ -31,7 +31,24 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    
+    ll t; cin >> t;
+    while(t--){
+        ll n; cin >> n;
+        vector<ll> v(n);   for(auto &i : v) cin >> i;
+        ll ans=lmax;
+        for(ll i=0;i<n;i++){
+            // now we'll look for chunks of same element
+            ll j=i;
+            while(v[j]==v[i] && j<n) j++;
+            j--;
+            //cout <<i << ' ' <<j << '\n';
+            ans = min(ans , (i-0 + n-1-j)*v[i]);
+            i=j;
+        }
+
+
+        cout << ans << '\n' ;
+    }
 
     
 

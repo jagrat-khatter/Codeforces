@@ -33,25 +33,22 @@ signed main()
 
     ll t; cin >> t;
     while(t--){
-        ll k,a,b,x,y;
-        cin >> k >>a >> b>>x>>y;
-        if(x>y){
-            ll ansy=0;
-            if(k >= b) ansy = (k - b + 1 + y - 1) / y ;
-            ll rem = k - ansy * y;
-            //cout << ansy << ' ' << rem << '\n';
-            ll ansx=0;
-            if(rem >= a) ansx= (rem - a + 1 + x -1 ) / x;
-            cout <<ansx + ansy << '\n' ;
+        ll x; cin >> x;
+        vector<ll> v;
+        for(ll i=1;i<=1e11+1;i=(2*i)+1){
+            v.push_back(i);
         }
-        else {
-            ll ansx=0;
-            if(k>=a)  ansx = (k - a + 1 + x -1 ) / x ;
-            ll rem = k - ansx * x;
-            ll ansy=0;
-            if(rem >= b) ansy= (rem - b + 1 + y-1) / y;
-            cout <<ansx + ansy << '\n' ;
+        // for(auto i : v) cout << i << ' ';
+        // cout << '\n' ;
+        ll id=0;
+
+        for(ll i=0;i<v.size();i++){
+            id=i;
+            if(v[i]  >=  x) break;
         }
+        //cout << id << '\n';
+
+        cout << 2*(id+1) + 1 << '\n' ;
     }
 
     

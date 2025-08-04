@@ -31,14 +31,25 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
+    vector<ll> fb;
+    fb.push_back(1);
+    fb.push_back(2);
+    for(ll i=2;i<=11;i++){
+        fb.push_back(fb[i-2]+fb[i-1]);
+    }
     ll t; cin >> t;
     while(t--){
-        ll w,h,a,b; cin >> w >> h >> a >> b;
-        ll x1,y1,x2,y2; cin >> x1>>y1>>x2>>y2;
-        if(mod(x1-x2)%a==0  &&   mod(y1-y2)%b==0) cout << "YES" << '\n';
-        else if(mod(x1-x2)%a==0 && mod(x1-x2)>=a) cout << "YES" << '\n';
-        else if(mod(y1-y2)%b==0 && mod(y1-y2)>=b) cout << "YES" << '\n';
-        else cout << "NO" << '\n' ;
+        ll n,m ; cin >> n >> m;
+        
+        ll sd1=fb[n-1] , sd2=fb[n-2];
+            for(ll i=0;i<m;i++){
+                ll w,l,h; cin >> w >> l >> h;
+            ll fg=0;
+            if(w>=sd1+sd2 || l>=sd1+sd2 || h>=sd1+sd2) fg=1;
+            if(w<sd1 || l<sd1 || h<sd1) fg=0;
+            cout << fg ;
+        }
+        cout << '\n' ;
     }
 
     
