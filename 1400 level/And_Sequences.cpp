@@ -8,7 +8,7 @@ ll power(ll b, ll e){
     if(e==0) return 1;
     ll value = power(b , e/2);
     if(e%2==0) return value*value;
-    else return value*value*b;
+    else return value*value*b;al
 }
 ll gcd(ll a,ll b){
     if(b==0) return a;
