@@ -33,22 +33,22 @@ signed main()
 
     ll t; cin >> t;
     while(t--){
-        ll x; cin >> x;
-        vector<ll> v;
-        for(ll i=1;i<=1e11+1;i=(2*i)+1){
-            v.push_back(i);
-        }
-        // for(auto i : v) cout << i << ' ';
-        // cout << '\n' ;
-        ll id=0;
+        ll n; cin >> n;
+        vector<ll> v(n);
+        ll ck=0;
+        ll na=-1;
+        for(auto &i : v) {cin >> i;if(i==0) ck=1;if(i!=0 && i!=-1) na=i;}
+        if(ck) {cout << "NO" << '\n'; continue;}
+        ll ans=1;
 
-        for(ll i=0;i<v.size();i++){
-            id=i;
-            if(v[i]  >=  x) break;
+        for(ll i=0;i<n;i++){
+            if(v[i]!=-1 && v[i]!=na){
+                ans=0; break;
+            }
         }
-        //cout << id << '\n';
 
-        cout << 2*(id+1) + 1 << '\n' ;
+        if(ans) cout << "YES" << '\n';
+        else cout << "NO" << '\n' ;
     }
 
     

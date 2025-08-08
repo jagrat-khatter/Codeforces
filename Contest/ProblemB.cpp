@@ -31,25 +31,34 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    vector<ll> fb;
-    fb.push_back(1);
-    fb.push_back(2);
-    for(ll i=2;i<=11;i++){
-        fb.push_back(fb[i-2]+fb[i-1]);
-    }
     ll t; cin >> t;
     while(t--){
-        ll n,m ; cin >> n >> m;
-        
-        ll sd1=fb[n-1] , sd2=fb[n-2];
-            for(ll i=0;i<m;i++){
-                ll w,l,h; cin >> w >> l >> h;
-            ll fg=0;
-            if(w>=sd1+sd2 || l>=sd1+sd2 || h>=sd1+sd2) fg=1;
-            if(w<sd1 || l<sd1 || h<sd1) fg=0;
-            cout << fg ;
+        ll n,x; cin >> n >> x;
+        string s; cin >> s;
+        ll ck1=0 , ck2=0;
+        for(ll i=0;i<x-1;i++){
+            if(s[i]=='#') ck1=1;
         }
-        cout << '\n' ;
+        for(ll i=x;i<n;i++){
+            if(s[i]=='#') ck2=1;
+        }
+        if(!ck1 && !ck2) {cout << 1 << '\n'; continue;} // both sides wall are not made
+        else if(x==1 || x==n) {cout << 1 << '\n'; continue;}
+        // we need to find first wall which is at distance with person
+        ll w1=0;
+        for(ll i=x-1;i>=0;i--){
+            if(s[i]=='#') {w1=i; break;}
+        }
+        ll w2=n;
+        for(ll i=x;i<n;i++){
+            if(s[i]=='#') {w2=i; break;}
+        }
+        //cout << w1 << ' '<< w2 << '\n';
+        if(w1 < n-1-w2){// w1 is more profitable to hamid
+            x--;
+            cout << min(x , n-w2)+1 << '\n';
+        }
+        else { x--;cout << min(w1+1 , n-x-1)+1 << '\n';}
     }
 
     
