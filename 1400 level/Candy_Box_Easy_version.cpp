@@ -46,8 +46,9 @@ signed main()
         // for(auto j : num) cout << j << ' ';
         // cout << '\n' ;
         ll ans=0 , ct=num[num.size()-1];
-        for(ll i=num.size();i>=0;i--){
-            if(ct<=num[i] && ct>=0) {ans += ct;ct--;s.insert(ct);}   //this candy size has not been used
+        for(ll i=num.size()-1;i>=0;i--){
+            while(ct>0 && ct>num[i]) ct--;
+            if(ct<=num[i] && ct>0) {ans += ct;ct--;s.insert(ct);}   //this candy size has not been used
             else if(ct<0)  break;
         }
 
