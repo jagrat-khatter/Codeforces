@@ -14,14 +14,6 @@ ll gcd(ll a,ll b){
 
     else return (b , b%a);
 }
-ll max(ll a,ll b){
-    if(a>b) return a;
-    else return b;
-}
-ll min(ll a,ll b){
-    if(a>b) return b;
-    else return a;
-}
 ll mod(ll n){
     if(n>=0) return n;
     else return -n;
@@ -33,35 +25,30 @@ signed main()
 
     ll t; cin >> t;
     while(t--){
-        ll n,x; cin >> n >> x;
-        string s; cin >> s;
-        ll ck1=0 , ck2=0;
-        for(ll i=0;i<x-1;i++){
-            if(s[i]=='#') ck1=1;
+        ll k; cin >> k;
+        vector<ll> v(k); set<ll> s;
+        map<ll ,ll> mp;
+        for(auto &i : v) {cin >> i;s.insert(i);mp[i]++;}
+        // now n*m = k-2
+        ll fg=0;
+        for(auto i : v) {
+            ll n = i , m;
+            if((k-2)%n == 0){
+                m = (k-2)/n;
+                if(s.find(m)!=s.end()){
+                    if((n==m && mp[m]>=2)  || n!=m){
+                        cout << n << ' ' << m ;
+                        fg=1; break;
+                    }
+                }
+            }
+
+
+            if(fg) break;
         }
-        for(ll i=x;i<n;i++){
-            if(s[i]=='#') ck2=1;
-        }
-        if(!ck1 && !ck2) {cout << 1 << '\n'; continue;} // both sides wall are not made
-        else if(x==1 || x==n) {cout << 1 << '\n'; continue;}
-        // we need to find first wall which is at distance with person
-        ll w1=0;
-        for(ll i=x-1;i>=0;i--){
-            if(s[i]=='#') {w1=i; break;}
-        }
-        ll w2=n;
-        for(ll i=x;i<n;i++){
-            if(s[i]=='#') {w2=i; break;}
-        }
-        //cout << w1 << ' '<< w2 << '\n';
-        if(w1 < n-1-w2){// w1 is more profitable to hamid
-            x--;
-            cout << min(x , n-w2)+1 << '\n';
-        }
-        else { x--;cout << min(w1+1 , n-x-1)+1 << '\n';}
+
+        cout << '\n';
     }
-
     
-
     return 0;
 }

@@ -14,14 +14,6 @@ ll gcd(ll a,ll b){
 
     else return (b , b%a);
 }
-ll max(ll a,ll b){
-    if(a>b) return a;
-    else return b;
-}
-ll min(ll a,ll b){
-    if(a>b) return b;
-    else return a;
-}
 ll mod(ll n){
     if(n>=0) return n;
     else return -n;
