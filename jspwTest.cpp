@@ -24,9 +24,26 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    string a="A BC" , b="AB C";
-    if(a>b) cout << a << '\n';
-    else cout << b << '\n' ;
+    ll n,m  ; cin >> n >> m;
+    ll g[n+1][m+1];
+    for(ll i=1;i<=n;i++){
+        for(ll j=1;j<=m;j++){
+            cin >> g[i][j];
+        }
+    }
+    ll q; cin >> q;
+    while(q--){
+        ll sum =0 ;
+        ll a,b,c,d; cin >> a >> b >> c >> d;
+        for(ll i=a;i<=c;i++){
+            for(ll j=b;j<=d;j++){
+                sum += g[i][j];
+            }
+        }
+
+        cout << sum << '\n';
+    }
+    
 
     return 0;
-}
+} 
