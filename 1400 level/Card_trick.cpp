@@ -5,14 +5,12 @@ const ll lmin = LLONG_MIN;
 const ll lmax = LLONG_MAX;
 ll power(ll b,ll e){
     if(e==0) return 1;
-
     ll value = power(b , e/2);
-    if(e%2==0)  return value*value;
+    if(e%2==0) return value*value;
     else return value*value*b;
 }
 ll gcd(ll a,ll b){
     if(b==0) return a;
-    
     return gcd(b , a%b);
 }
 ll mod(ll n){
@@ -24,20 +22,22 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    ll n; cin >> n;
-    vector<ll> v(n+2 , 0); // we wan t one based indexing and need n+1th index also
-    ll q; cin >> q;
-    while(q--){
-        ll l,r,k; cin >> l >> r >> k;
-        v[l]+= k;
-        v[r+1]-= k;
+
+    ll t; cin >> t;
+    while(t--){
+        ll n; cin >> n;
+        vector<ll> v(n); for(auto & j : v) cin >> j;
+        ll m; cin >> m;
+        ll e=1;
+        for(ll j=1;j<=m;j++) {
+            ll x; cin >> x; e+= x;
+        }
+        if(e%n!=0) e = e%n;
+        else e = n;
+        cout << v[e-1] << '\n' ;
     }
-    for(ll i=2;i<=n+1;i++){
-        v[i] = v[i-1]+v[i];
-    }
-    for(auto j : v) cout << j << ' ';
-    cout << '\n' ;
+
 
 
     return 0;
-} 
+}
