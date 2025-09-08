@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
+using ld = long double;
 const ll lmin = LLONG_MIN;
 const ll lmax = LLONG_MAX;
 ll power(ll b,ll e){
@@ -19,24 +20,31 @@ ll mod(ll n){
     if(n>=0) return n;
     else return -n;
 }
+
 signed main()
 {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    ll n; cin >> n;
-    vector<ll> v(n+2 , 0); // we wan t one based indexing and need n+1th index also
-    ll q; cin >> q;
-    while(q--){
-        ll l,r,k; cin >> l >> r >> k;
-        v[l]+= k;
-        v[r+1]-= k;
+    // ld a=3.3450989485435;
+    cout << fixed << setprecision(15) ;
+
+    ld l=0 , r=1e7 + 1;
+    ll n , k; cin >> n >>k;
+    vector<ld> v(n); for(auto & i : v) cin >> i;
+
+    for(ll i=1;i<=50;i++){
+        ld m = (l+r)/2;
+        ll ans = 0;
+        for(auto j : v){
+            ans += (ll)(j/m);
+        }
+        if(ans>=k) l=m;
+        else r=m;
     }
-    for(ll i=2;i<=n+1;i++){
-        v[i] = v[i-1]+v[i];
-    }
-    for(auto j : v) cout << j << ' ';
-    cout << '\n' ;
+    cout << l << '\n' ;
+
+    
 
 
     return 0;
