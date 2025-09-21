@@ -26,23 +26,9 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    // ld a=3.3450989485435;
-    cout << fixed << setprecision(15) ;
-
-    ld l=0 , r=1e7 + 1;
-    ll n , k; cin >> n >>k;
-    vector<ld> v(n); for(auto & i : v) cin >> i;
-
-    for(ll i=1;i<=50;i++){
-        ld m = (l+r)/2;
-        ll ans = 0;
-        for(auto j : v){
-            ans += (ll)(j/m);
-        }
-        if(ans>=k) l=m;
-        else r=m;
-    }
-    cout << l << '\n' ;
+    vector<char> s = {'a' , 'c' , 'j' , 'a' , 'm' , 'l' , 'p' , 'b'};
+    sort (s.begin() , s.end());
+    for(auto & i : s) cout << i << ' ';
 
     
 
