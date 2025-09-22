@@ -26,10 +26,8 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    vector<char> s = {'a' , 'c' , 'j' , 'a' , 'm' , 'l' , 'p' , 'b'};
-    sort (s.begin() , s.end());
-    for(auto & i : s) cout << i << ' ';
-
+    set<ll> s={2,3,4,6,8};
+    cout << *(s.begin());
     
 
 
