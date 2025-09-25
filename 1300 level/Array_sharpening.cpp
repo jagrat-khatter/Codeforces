@@ -50,7 +50,6 @@ signed main()
         else cout << "No" << '\n';
     }
 
-
-
+ 
     return 0;
 }

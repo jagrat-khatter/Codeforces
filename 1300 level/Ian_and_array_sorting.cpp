@@ -15,18 +15,26 @@ ll gcd(ll a,ll b){
     if(b==0) return a;
     else return gcd(b , a%b);
 }
-ll abs(ll n){
-    if(n>=0) return n;
-    else return -n;
-}
 signed main()
 {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    ll t
+    ll t; cin >> t;
+    while(t--){
+        ll n; cin >> n;
+        vector<ll> v(n);
+        for(auto & i : v) cin >> i;
 
-
+        ll sod=0 , sev=0;
+        for(ll i=0;i<n;i++){
+            ((i+1)%2==0 ? sev+=v[i] : sod+=v[i]);
+        }
+        if(n%2==0 && sev>=sod) cout << "YES\n";
+        else if(n%2==1) cout << "YES\n";
+        else cout << "NO\n";
+        
+    }
 
 
     return 0;
