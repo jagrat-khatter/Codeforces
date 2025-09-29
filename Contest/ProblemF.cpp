@@ -1,8 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-using ll = long long;
-using ld = long double;
-const ll MOD = 1e9 + 7;
+using ll = long long ;
+using ld = long double ;
 const ll lmin = LLONG_MIN;
 const ll lmax = LLONG_MAX;
 ll power(ll b,ll e){
@@ -15,16 +14,16 @@ ll gcd(ll a,ll b){
     if(b==0) return a;
     else return gcd(b , a%b);
 }
-ll abs(ll n){
-    if(n>=0) return n;
-    else return -n;
-}
 signed main()
 {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    ll t
+    ll t; cin >> t;
+    while(t--){
+        
+    }
+
 
 
 
