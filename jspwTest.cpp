@@ -17,34 +17,9 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    ll t; cin >> t;
-    while(t--){
-        ll n; cin >> n;
-        vector<ll> v;
-
-        ll id=0;
-        for(ll i=0;i<n;i++){
-            ll x; cin >> x; v.push_back(x);if(x!=0) id=i;
-        }
-        if(v[id]>0) {cout << "NO\n" ; continue;}
-        
-        ll dwn;
-        //cout << id << '\n';
-        bool ans=true;
-        for(ll i=id;i>=0;i--){
-            if(i==id) dwn = abs(v[id]);
-            else if(i!=0) {
-                dwn = v[i] - dwn;
-                if(dwn>=0) {ans=false; break;}
-                dwn = abs(dwn);
-            }
-            else if(i==0 && dwn!=v[0]) {ans=false; break;}
-        }
-
-        cout << (ans==true ? "YES\n" : "NO\n") ;
-
-
-    }
+    ll ct = 0;
+    ll pt = 3;
+    while(pt<=)
 
 
 
