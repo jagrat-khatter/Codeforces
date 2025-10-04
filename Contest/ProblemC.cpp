@@ -6,9 +6,8 @@ const ll lmin = LLONG_MIN;
 const ll lmax = LLONG_MAX;
 ll power(ll b,ll e){
     if(e==0) return 1;
-    ll value = power(b , e/2);
-    if(e%2==0) return value*value;
-    else return b*value*value;
+    ll value = power(b,e/2);
+    return value*value*((e%2==0) ? 1 : b);
 }
 ll gcd(ll a,ll b){
     if(b==0) return a;
@@ -21,24 +20,55 @@ signed main()
 
     ll t; cin >> t;
     while(t--){
-        ll n; cin >> n;
+        ll n,q; cin >> n >> q;
         vector<ll> v(n);
-        set<ll> s; map<ll,ll> mp;
-        bool ans = true;
-        for(auto &i : v) {cin >> i;s.insert(i); mp[i]++;}
-        for(ll i=0;i<n;i++){
-            mp[v[i]]--;
-            if(mp[v[i]] == 0) s.erase(v[i]);
-            ll x = 2*v[i] - 1;
-            auto it = s.upper_bound(x);
-            // for(auto j : s)  cout << j << ' ';
-            // cout << '\n';
-            if(it != s.end()) {ans=false ; break;}
+        for(auto & i : v) cin >> i;
+        vector<ll> xr,on,inf;
+
+        if(v[0]==1) {xr.push_back(0);on.push_back(1);}
+        else {xr.push_back(1); on.push_back(0);}
+
+        inf.push_back(0);
+
+        for(ll i=1;i<n;i++){
+            if(v[i]==1) {xr.push_back(xr[xr.size()-1] + 0); on.push_back(on[on.size()-1]+1);}
+            else {xr.push_back(xr[xr.size()-1] + 1); on.push_back(on[on.size()-1]+0);}
+
+            // if not inflection (element is same as of previous element)
+            if(v[i]==v[i-1]) inf.push_back(inf[inf.size()-1] + 1);
+            else inf.push_back(inf[inf.size()-1] + 0);
         }
+        // for(auto j : xr) cout << j << ' ';
+        // cout << '\n';
+        // for(auto j : on) cout << j << ' ';
+        // cout << '\n';
+        // for(auto j : inf) cout << j << ' ';
+        // cout << '\n';
 
-        cout << ((ans==true)? "YES" : "NO") << '\n';
-
+        
+        while(q--){
+            ll l,r; cin >> l>> r;
+            l--; r--;// making it zero based indexing
+            ll n0 , n1 , ni ;
+            if(l!=0){
+                n0 = xr[r] - xr[l-1];
+                n1 = on[r] - on[l-1];
+                ni = inf[r] - inf[l];
+            }
+            else {
+                n0 = xr[r];
+                n1 = on[r] ;
+                ni = inf[r] ;
+            }
+            if(n0%3 ==0 && n1%3 ==0){
+                ll ct=(n0 + n1)/3;
+                if(ni>0) cout << ct << '\n';
+                else cout << ct+ 1 << '\n';
+            }
+            else cout << -1 << '\n';
+        }
     }
+
 
 
 

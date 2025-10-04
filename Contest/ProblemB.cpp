@@ -6,9 +6,8 @@ const ll lmin = LLONG_MIN;
 const ll lmax = LLONG_MAX;
 ll power(ll b,ll e){
     if(e==0) return 1;
-    ll value = power(b , e/2);
-    if(e%2==0) return value*value;
-    else return b*value*value;
+    ll value = power(b,e/2);
+    return value*value*((e%2==0) ? 1 : b);
 }
 ll gcd(ll a,ll b){
     if(b==0) return a;
@@ -21,24 +20,30 @@ signed main()
 
     ll t; cin >> t;
     while(t--){
-        ll n; cin >> n;
-        vector<ll> v(n);
-        for(auto & i : v)  cin >> i;
-
-        ll p1=0 , p2=v.size()-1, fg=0;
-        // if flag is 0 means we have to print in increasing order 
-        while(p1<=p2){
-            if(n%2==1 && p1==p2) cout << "L";
-
-            if(v[p1] < v[p2] && fg==0) {cout << "L" <<"R";fg=1;}
-            else if(v[p1] > v[p2] && fg==0) {cout << "R" << "L";fg=1;}
-            else if(v[p1] < v[p2] && fg==1) {cout <<"R" << "L";fg=0;}
-            else if(v[p1] > v[p2] && fg==1) {cout << "L" << "R";fg=0;}
-            p1++; p2--;
+        ll n,kx,ky,dx,dy; cin >>n>> kx>> ky>> dx>>dy;
+        if(kx==dx){
+            if(ky<dy) cout << dy ;
+            else cout<< n-dy ;
         }
-
+        else if(ky==dy){
+            if(kx<dx) cout << dx ;
+            else cout << n-dx;
+        }
+        else if(kx<dx && ky<dy){
+            cout << max({dx,dy});
+        }
+        else if(kx>dx && ky>dy){
+            cout << max({n-dx , n-dy});
+        }
+        else if(kx>dx && ky<dy){
+            cout << max({n-dx , dy});
+        }
+        else if(kx<dx && ky>dy){
+            cout << max({dx , n-dy});
+        }
         cout << '\n';
     }
+
 
 
 
