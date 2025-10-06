@@ -40,31 +40,40 @@ signed main()
         if(c1>c2) lead=2;
         else lead=1;
 
-        //cout << c1 << ' '<< c2 << '\n';
-        ll sz1 = ((v1.size() +2 -1) /2) , sz2 = v1.size()-sz1;
-        //cout << sz1 <<' ' << sz2 << '\n';
-        ll nz1=0 , nz2=0;
+        
         if(lead==1){
-            for(ll j=v1.size()-1;j>=v1.size()-sz1;j--){
-                c1 += v1[j];
-                if(!v1[j]) nz1++;
+            ll ct1=0 , ct2=0;
+            for(auto i : v1) ct1 += i;
+            for(auto i : v2) ct2 += i;
+
+            
+            if(ct2>=ct1){
+                c1 += ct1; c2 += ct1;
+                c2 += (ct2-ct1)/2;// flooring
             }
-            for(ll j=v2.size()-1;j>=v2.size()-sz2;j--){
-                c2 += v2[j]; if(!v2[j]) nz2++;
+            else {
+                c1 += ct2; c2 += ct2;
+                c1 += (ct1-ct2+2-1)/2; // ceiling
             }
         }
         else {
-            for(ll j=v1.size()-1;j>=v1.size()-sz2;j--){
-                c1 += v1[j]; if(!v1[j]) nz1++;
+            ll ct1=0 , ct2=0;
+            for(auto i : v1) ct1 += i;
+            for(auto i : v2) ct2 += i;
+
+            
+            if(ct2>ct1){
+                c1 += ct1; c2 += ct1;
+                c2 += (ct2-ct1+2-1)/2; // flooring
             }
-            for(ll j=v2.size()-1;j>=v2.size()-sz1;j--){
-                c2 += v2[j]; if(!v2[j]) nz2++;
+            else {
+                c1 += ct2; c2 += ct2;
+                c1 += (ct1-ct2)/2; // ceiling
             }
         }
-        nz1 /= 2; nz2 /= 2;
-        //cout << c1 << ' ' << c2 << '\n';
-        if(c1+nz1>c2+nz2) cout << "First\n";
-        else if(c1+nz1<c2+nz2) cout << "Second\n";
+        
+        if(c1>c2) cout << "First\n";
+        else if(c1<c2) cout << "Second\n";
         else cout << "Draw\n";  
     }
 
