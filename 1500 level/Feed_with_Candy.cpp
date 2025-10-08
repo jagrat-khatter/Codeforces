@@ -4,10 +4,9 @@ using ll = long long;
 using ld = long double;
 const ll lmin = LLONG_MIN;
 const ll lmax = LLONG_MAX;
-ll func1(set<pair<ll,ll>> s1,set<pair<ll,ll>> s0 , ll x){
-    map<pair<ll,ll>,ll> m1,m0;
-    for(auto i: s1) {m1[i]++;cout << i.first << ' ' << i.second << '\n';}
-    for(auto i: s0) {m0[i]++;cout << i.first << ' ' << i.second << '\n';}
+ll func1(set<pair<ll,ll>> s1,set<pair<ll,ll>> s0 , ll x,map<pair<ll,ll>,ll> m1 , map<pair<ll,ll>,ll> m0){
+    
+    
 
     ll prv=0 , ct=0;
     while(s1.size() || s0.size()){
@@ -47,10 +46,9 @@ ll func1(set<pair<ll,ll>> s1,set<pair<ll,ll>> s0 , ll x){
 
     return ct;
 }
-ll func2(set<pair<ll,ll>> s1,set<pair<ll,ll>> s0 , ll x){
-    map<pair<ll,ll>,ll> m1,m0;
-    for(auto i: s1) {m1[i]++;}
-    for(auto i: s0) {m0[i]++;}
+ll func2(set<pair<ll,ll>> s1,set<pair<ll,ll>> s0 , ll x , map<pair<ll,ll>,ll> m1 , map<pair<ll,ll>,ll> m0){
+    
+    
 
     ll prv=1 , ct=0;
     while(s1.size() || s0.size()){
@@ -100,13 +98,15 @@ signed main()
     while(t--){
         ll n , x; cin >> n >> x;
         set<pair<ll,ll>> s1 ,s0; // this will store the candy belonging to type 1 and 0
+        map<pair<ll,ll>,ll> m1,m0;
         for(ll i=0;i<n;i++){
             ll a,b,c; cin >> a >> b >> c;
-            if(a==1) s1.insert({b,c});
-            else s0.insert({b,c});
+            if(a==1) {s1.insert({b,c});m1[{b,c}]++;}
+            else {s0.insert({b,c});m0[{b,c}]++;}
         }
-
-        cout << func2(s1 , s0 , x);
+        
+        
+        cout << max(func2(s1, s0, x ,m1,m0) , func1(s1,s0,x,m1,m0));
         
     }
 
