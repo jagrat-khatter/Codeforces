@@ -2,59 +2,50 @@
 using namespace std;
 using ll = long long;
 using ld = long double;
-const ll MOD = 1e9 + 7;
-const ll lmax = LLONG_MAX;
 const ll lmin = LLONG_MIN;
+const ll lmax = LLONG_MAX;
+const ll MOD = 1e9 + 7;
 ll power(ll b,ll e){
     if(e==0) return 1;
     ll value = power(b , e/2);
     return value*value*((e%2==0) ? 1 : b);
 }
 ll gcd(ll a,ll b){
-    if(b==0) return a;
+    if(b==0) return 1;
     else return gcd(b , a%b);
-}
-bool comparator(pair<ll,ll> a,pair<ll,ll> b){   
-    if(a.second!=b.second) return a.second < b.second;
-    else return a.first < b.first ;
-}
-
-ll helper(ll id , vector<ll>& dp , vector<ll>& v){
-    if(id>=dp.size()) return 0;
-
-    if(dp[id] != lmin) return dp[id];
-    
-    
-    ll ans = 1;
-    for(ll i=2*id;i<dp.size();i+=id){
-        if(v[id] < v[i]) ans = max(ans , 1 + helper(i, dp,v));
-    }
-
-    return dp[id] = ans;
 }
 signed main()
 {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    ll t; cin >> t;
+    ll t; t=1;
     while(t--){
-        ll n; cin >> n;
-        vector<ll> v(n+1) , dp(n+1 , lmin);
-
-        v[0]=0;
+        ll n,W; cin >> n >> W;
+        vector<ll> w(n+1),v(n+1);
         for(ll i=1;i<=n;i++){
-            ll x; cin >> x;  v[i]=x;
+            ll p,q; cin >> p >> q;
+            w[i] = p; v[i] = q;
         }
 
-        
-        ll ans=1;
-        for(ll i=1;i<=n;i++){
-            ans = max(ans , helper(i , dp , v));
-        }
+        vector<ll> dp(W+1 , 0),curr(W+1 , 0);
 
-        cout << ans << '\n' ;
+        for(ll id=1;id<=n;id++){
+            for(ll sum=W;sum>=1;sum--){
+
+                curr[sum] = dp[sum];
+                if(sum-w[id] >= 0) curr[sum] = max(curr[sum] ,v[id] + dp[sum-w[id]]);
+                if(curr[sum]==0) break;
+            }
+            cout << id << '\n' ;
+            for(auto j : curr) cout << j << ' ';
+            cout << '\n' ;
+            swap(dp , curr);
+        }
+        cout << dp[W] ;
     }
+
+
 
 
     return 0;
