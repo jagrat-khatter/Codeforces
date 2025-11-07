@@ -4,9 +4,10 @@ using ll = long long;
 using ld = long double;
 const ll lmin = LLONG_MIN;
 const ll lmax = LLONG_MAX;
+const ll MOD = 1e9 + 7;
 ll power(ll b,ll e){
     if(e==0) return 1;
-    ll value = power(b,e/2);
+    ll value = power(b , e/2);
     return value*value*((e%2==0) ? 1 : b);
 }
 ll gcd(ll a,ll b){
@@ -20,17 +21,32 @@ signed main()
 
     ll t; cin >> t;
     while(t--){
-
-        ll n; cin >> n;
-        set<ll> s;
-        for(ll i=0;i<n;i++){
-            ll x; cin >> x;
-            s.insert(x);
+        ll n,k; cin >> n >> k;
+        vector<vector<char>> v(n+1 , vector<char> (n+1));
+        bool status = true;
+        for(ll i=1;i<=n && status==true;i++){
+            for(ll j=1;j<=n && status==true;j++){
+                if(k>0) {v[i][j]='U'; k--;}
+                else if(i!=n && j==n) v[i][j]='D';
+                else if(i==n && j==n && v[i][j-1]=='U') {status=false;}
+                else if(j==1) v[i][j]='R';
+                else if(j==n) v[i][j]='L';
+                else v[i][j]='R';
+            }
         }
 
-        cout << s.size() + s.size()-1 << '\n';
+        if(status) {
+            cout << "YES\n" ;
+            for(ll i=1;i<=n;i++){
+                for(ll j=1;j<=n;j++){
+                    cout << v[i][j] ;
+                }
+                cout << '\n' ;
+            }
+            
+        }
+        else cout << "NO\n" ; 
     }
-
 
 
 

@@ -23,7 +23,6 @@ signed main()
     while(t--){
         ll n,W; cin >> n >> W;
         vector<ll> w(n+1),v(n+1);
-        ll mn,mx;
         for(ll i=1;i<=n;i++){
             ll p,q; cin >> p >> q;
             w[i] = p; v[i] = q;
@@ -36,7 +35,7 @@ signed main()
             else dp[pf]=lmax;
         }
         // for(auto j : dp) cout << j << ' ';
-        //     cout << '\n';
+        // cout << '\n';
         for(ll id=n-1;id>=1;id--){
             for(ll pf=1e5;pf>=0;pf--){
                 curr[pf]=lmax;
@@ -55,8 +54,6 @@ signed main()
             if(dp[sum+1]>W) {cout << sum << '\n'; break;}
         }
         if(dp[1e5]<=W) cout << 1e5 << '\n';
-        
-
     }
 
 
