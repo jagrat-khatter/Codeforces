@@ -25,7 +25,7 @@ signed main()
     for(auto &i : v) cin >> i;
     vector<ld> dp(n+1) , curr(n+1); // for storing probabilities of getting x tails 
     dp[0]=1-v[0];dp[1]=v[0];
-    for(ll id=1;id<n;id++){// following zero based indexing here 
+    for(ll id=1;id<n;id++){ // following zero based indexing here 
         curr[0]=1-v[id];
         ld ph = v[id];
         ld pt = 1-v[id];
