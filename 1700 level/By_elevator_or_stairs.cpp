@@ -34,6 +34,7 @@ signed main()
     cout << 0 <<' ' << min(dp.first , dp.second) << ' ';
     for(ll i=2;i<n;i++){
         curr.second = min(dp.first+b[i]+c , dp.second+b[i]);
+        
         // if person is reaching the i index by elevator
         curr.first = min(dp.first+a[i] , dp.second+a[i]);
         // if person is reaching the i index by staircase
