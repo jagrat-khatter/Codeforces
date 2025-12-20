@@ -21,31 +21,30 @@ signed main()
 
     ll t; cin >> t;
     while(t--){
-        ll n,k; cin >> n >> k;
-        vector<vector<char>> v(n+1 , vector<char> (n+1));
-        bool status = true;
-        for(ll i=1;i<=n && status==true;i++){
-            for(ll j=1;j<=n && status==true;j++){
-                if(k>0) {v[i][j]='U'; k--;}
-                else if(i!=n && j==n) v[i][j]='D';
-                else if(i==n && j==n && v[i][j-1]=='U') {status=false;}
-                else if(j==1) v[i][j]='R';
-                else if(j==n) v[i][j]='L';
-                else v[i][j]='R';
+        ll n; cin >> n;
+        vector<vector<ll>> v(n+1 , vector<ll> (n+1));
+        ll ct=1;
+        for(ll i=1;i<=n;i++){
+            for(ll j=1;j<=n;j++){
+                v[i][j] = ct;
+                ct++;
             }
         }
 
-        if(status) {
-            cout << "YES\n" ;
-            for(ll i=1;i<=n;i++){
-                for(ll j=1;j<=n;j++){
-                    cout << v[i][j] ;
-                }
-                cout << '\n' ;
+        ll ans = lmin;
+        for(ll i=1;i<=n;i++){
+            for(ll j=1;j<=n;j++){
+                ll temp = v[i][j];
+                if(i-1 >= 1) temp+= v[i-1][j];
+                if(i+1 <= n) temp+= v[i+1][j];
+                if(j+1 <=n) temp += v[i][j+1];
+                if(j-1 <= n) temp += v[i][j-1];
+                ans = max(temp , ans);
             }
-            
         }
-        else cout << "NO\n" ; 
+
+        cout << ans << '\n' ;
+
     }
 
 

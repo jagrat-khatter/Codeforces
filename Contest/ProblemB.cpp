@@ -21,7 +21,21 @@ signed main()
 
     ll t; cin >> t;
     while(t--){
-        
+        ll n; cin >> n;
+        vector<ll> v;
+        for(ll i=1;i<=n;i++){
+            ll x;cin >> x; if(x!=0) v.push_back(x);
+        }
+
+        // suppose we increase all the elements by 1
+        if(!v.size()) {cout << 0 << '\n'; continue;}
+        ll ct=0;
+        for(auto j : v){
+            ct += (j-1);
+        }
+
+        if(ct>=(n-1)) cout << v.size() << '\n';
+        else cout << v.size() - (n-1-(ct)) << '\n' ;
     }
 
 
