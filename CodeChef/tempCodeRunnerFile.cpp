@@ -1,1 +1,1 @@
-i * (m/i)
+vector<vector<ll>> dp(sz+1 , vector<ll> (power(2 , n) , 0));

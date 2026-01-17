@@ -21,30 +21,28 @@ signed main()
 
     ll t; cin >> t;
     while(t--){
-        ll n; cin >> n;
-        vector<vector<ll>> v(n+1 , vector<ll> (n+1));
-        ll ct=1;
+        ll n,a,b; cin >> n >> a >> b;
+        vector<ll> v(n+1);
         for(ll i=1;i<=n;i++){
-            for(ll j=1;j<=n;j++){
-                v[i][j] = ct;
-                ct++;
-            }
+            cin >> v[i];
         }
 
-        ll ans = lmin;
+        vector<ll> st(n+1);
+        st[0]=0; // no jacket
+        ll ans=0;
         for(ll i=1;i<=n;i++){
-            for(ll j=1;j<=n;j++){
-                ll temp = v[i][j];
-                if(i-1 >= 1) temp+= v[i-1][j];
-                if(i+1 <= n) temp+= v[i+1][j];
-                if(j+1 <=n) temp += v[i][j+1];
-                if(j-1 <= n) temp += v[i][j-1];
-                ans = max(temp , ans);
+            
+            if(v[i]>b){
+                st[i]=0;
             }
+            else if(v[i]<a) st[i]=1;
+            else st[i]=st[i-1];
+
+            if(st[i-1]==0 && st[i]==1) ans++;
+            
         }
 
         cout << ans << '\n' ;
-
     }
 
 

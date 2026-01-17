@@ -4,7 +4,6 @@ using ll = long long;
 using ld = long double;
 const ll lmin = LLONG_MIN;
 const ll lmax = LLONG_MAX;
-const ll MOD = 1e9 + 7;
 ll power(ll b,ll e){
     if(e==0) return 1;
     ll value = power(b , e/2);
@@ -22,18 +21,29 @@ signed main()
     ll t; cin >> t;
     while(t--){
         ll n; cin >> n;
-
-        string s; cin >> s;
-        map<char , ll> mp;
-        for(auto j : s) mp[j]++;
-        ll ans=1;
-        for(auto j : s){
-            if(mp[j] > 2) ans=0;
+        vector<ll> v(n+1);
+        for(ll i=1;i<=n;i++){
+            cin >> v[i];
         }
-        if(ans) cout << "YES" ;
-        else cout << "NO" ;
-        cout << '\n' ;
+
+        vector<ll> dp(n+1);
+        for(ll id=n;id>=1;id--){
+            ll p1,p2;
+            if(v[id]<n-id) p1=dp[id+v[id]+1];
+            else if(v[id]==n-id) p1=0;
+            else p1=n-id+1;
+
+            if(id!=n) p2 = 1 + dp[id+1];
+            else p2=lmax;
+
+            //cout << id << ' ' << p1 << ' '<< p2 << '\n' ;
+
+            dp[id] = min(p1 , p2);
+        }
+
+        cout << dp[1]  << '\n';
     }
+
 
 
 

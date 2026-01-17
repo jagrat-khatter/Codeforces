@@ -19,46 +19,32 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    // 1<= y < x <= k
-    // qi = (x/y) (floored)
-    // ri = (x%y)
-    // if we selcet a unique pair of (x,y) then it will give unique pair {(x/y) , (x%y)}
-
     ll t; cin >> t;
     while(t--){
-        ll n,k ; cin >> n >> k;
-        vector<ll> q(n) , r(n);
-        for(auto &j : q) cin >> j;
+        ll n; cin >> n;
+        vector<ll> dg;
+        ll cn = n;
 
-        for(auto &j : r) cin >> j;
-
-        
-        vector<ll> sms; 
-
-        for(ll i=0;i<n;i++){
-            ll t = (r[i]+1);
-            ll sm;
-
-            if(k%t==r[i]) sm=(k/t);
-            else sm=(k/t)-1;
-            //cout << k << ' ' << t << ' '  << q[i] << ' ' <<  sm<< '\n';
-            if(sm>0) sms.push_back(sm);// this means that any qi which is less than equal sm
+        ll od=0,ev=0;
+        while(cn){
+            dg.push_back(cn%10);
+            if((cn%10)%2==0) ev=1;
+            else od=1;
+            cn /= 10;
+        }
+        if(n%2==1) cout << 0;
+        else if(dg.size()==1 && ev==1) cout << -1 ;
+        else if(od==1 && ev==0) cout << 0 ;
+        else if(od==1 && ev==1) cout << 1 ;
+        else {
+            sort(dg.begin() , dg.end());
+            ll mx=dg[dg.size()-1];
+            ll lst = n%10;
+            if(lst - mx < 0) cout << 2 ;
+            else cout << 3 ;
         }
 
-        sort(sms.begin() , sms.end());
-        sort(q.begin() , q.end());
-
-        // for(auto j : sms) cout << j << ' ';
-        // cout << '\n' ;
-
-        ll ans=0;
-        ll ptr1=0 , ptr2=0; 
-        while(ptr1<sms.size() && ptr2<q.size()){
-            if(sms[ptr1]>=q[ptr2]) {ans++;ptr1++;ptr2++;}
-            else ptr1++;
-        }
-
-        cout << ans << '\n' ;
+        cout << '\n' ;
 
     }
 
