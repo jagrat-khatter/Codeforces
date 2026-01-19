@@ -55,7 +55,6 @@ signed main()
                 x0 = x0 ^ (pfXor[r] ^ pfXor[l-1]);
                 x1 = x1 ^ (pfXor[r] ^ pfXor[l-1]);
             }
-
         }
 
         cout << '\n' ;
