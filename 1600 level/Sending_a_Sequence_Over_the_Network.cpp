@@ -15,32 +15,41 @@ ll gcd(ll a,ll b){
     if(b==0) return a;
     else return gcd(b , a%b);
 }
-void debug(const vector<ll>& v){
+void debug(vector<ll>& v){
     cerr << "[ ";
     for(auto j : v) cerr << j << ' ';
-    cerr << "]\n" ;
+    cerr << "]\n";
 }
 signed main()
 {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    ll t; cin>> t;
+    ll t; cin >> t;
     while(t--){
         ll n; cin >> n;
-        vector<ll> xv(n+1 ,0) , yv(n+1 ,0);
+        vector<ll> v(n+1);
+        map<ll , set<ll>> bw;
         for(ll i=1;i<=n;i++){
-            cin >> xv[i]; cin >> yv[i];
+            cin >> v[i] ;
+            if(i + v[i]<=n) bw[i + v[i]].insert(i);
         }
 
-        sort(xv.begin() , xv.end());
-        sort(yv.begin() , yv.end());
+        vector<ll> dp(n+1 ,0);
+        dp[0]=1;
+        dp[1]=0;
+        for(ll i=2;i<=n;i++){
+            if(i - v[i] - 1 >=0) dp[i] = max(dp[i] , dp[i-v[i]-1]);
+            for(auto j : bw[i]) dp[i] = max(dp[i] , dp[j-1]) ;
 
-        ll cx = ((n%2==0) ? xv[(n/2)+1]-xv[(n/2)]+1 : 1);
-        ll cy = ((n%2==0) ? yv[(n/2)+1]-yv[(n/2)]+1 : 1);
+            //cout << i << ' ' << dp[i] << '\n' ;
+        }
 
-        cout << cx * cy << '\n' ;
+        cout << (dp[n] ? "YES" : "NO") << '\n' ;
     }
+
+
+
 
     return 0;
 }
