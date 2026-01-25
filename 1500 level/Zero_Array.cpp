@@ -15,23 +15,27 @@ ll gcd(ll a,ll b){
     if(b==0) return a;
     else return gcd(b , a%b);
 }
-vector<ll> v;
-void sieve(vector<ll>& v,ll n){
-    ll ptr=1;
-    for(ll i=1;i<=n;i++){
-        for(ll j=ptr;j<=1e5;j++)
-    }
+void debug(const vector<ll>& v){
+    cerr << "[ ";
+    for(auto j : v) cerr << j << ' ';
+    cerr << "]\n";
+    return ;
 }
 signed main()
 {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    v.resize(1e5+1 , 1);
     ll n; cin >> n;
-    sieve(v , n);
+    ll mx = lmin , sum=0; 
+    for(ll i=1;i<=n;i++){
+        ll x; cin >> x; mx = max(mx , x);
+        sum += x;
+    }
 
-    
+    if(sum%2==0 && mx<=(sum/2)) cout << "YES\n";
+    else cout << "NO\n" ;
+
 
     return 0;
 }
