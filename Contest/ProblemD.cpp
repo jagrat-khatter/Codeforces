@@ -4,6 +4,8 @@ using ll = long long;
 using ld = long double;
 const ll lmin = LLONG_MIN;
 const ll lmax = LLONG_MAX;
+const ll imin = INT_MIN;
+const ll imax = INT_MAX;
 const ll MOD = 1e9 + 7;
 ll power(ll b,ll e){
     if(e==0) return 1;
@@ -14,57 +16,47 @@ ll gcd(ll a,ll b){
     if(b==0) return a;
     else return gcd(b , a%b);
 }
-bool comparator(ll a,ll b){
-    return a>b;
+void debug(const vector<ll>& v){
+    cerr << "[ ";
+    for(auto j : v) cerr << j << ' ';
+    cerr << "]\n" ; return ;
 }
 signed main()
 {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
+
     ll t; cin >> t;
     while(t--){
-        ll l,w,r,g,b; cin >> l >> w >> r >> g >> b;
-        
-        ll ct = (r ? 1 : 0) + (g ? 1 : 0) + (b ? 1 : 0);
-        ll ans=0;
-        if(ct==1){
-            ans=4;
+        ll n,k ; cin >> n >> k;
+        vector<ll> v(n+1); 
+        for(ll i=1;i<=n;i++){
+            cin >> v[i];
         }
-        else if(ct==2){
-            ll c1 = max(r , g);
-            ll c2 = max(g , b);
-            if(c1==(2*l+w) || c2==(2*l+w) || c1==(2*w+l) || c2==(2*w+l)) ans=4;
-            else if(c1==2*l || c1==2*w || c1==(l+w)) ans=4;
-        }
-        else if(ct==3){
-            //cout << r << ' ' << g <<  ' ' << b << '\n' ;
-            vector<ll> v={l,l,w,w};
-            if(r==(l+l) && (g==w && b==w)) ans=4;
-            else if(r==(w+w) && (g==l && b==l)) ans=4;
-            else if(r==(w+l) && ((g==l && b==w) || (g==w && b==l))) ans=4;
-            else if(g==(l+l) && (r==w && b==w)) ans=4;
-            else if(g==(w+w) && (r==l && b==l)) ans=4;
-            else if(g==(w+l) && ((r==l && b==w) || (r==w && b==l))) ans=4;
-            else if(b==(l+l) && (g==w && r==w)) ans=4;
-            else if(b==(w+w) && (g==l && r==l)) ans=4;
-            else if(b==(w+l) && ((g==l && r==w) || (g==w && r==l))) ans=4;
-        }
+        set<ll> s1={v[1]+k+1},s2={v[1]-k-1};
 
-        if(ans!=4){
-            if(ct==3){
-                if(r==(l) || r==(w) || r==(l+l) || r==(w+w) || r==(w+l) || r==(w+w+l) || r==(l+l+w)) ans=5;
-                else if(g==(l) || g==(w) || g==(l+l) || g==(w+w) || g==(w+l) || g==(w+w+l) || g==(l+l+w)) ans=5;
-                else if(b==(l) || b==(w) || b==(l+l) || b==(w+w) || b==(w+l) || b==(w+w+l) || b==(l+l+w)) ans=5;
+        ll ct=0;
+        for(ll i=2;i<=n;i++){
+            ll ans=0;
+            if(s1.size()){
+                
+                if(v[i]>=*(s1.begin())) ans=1;
+                else if(v[i]<=*(--s2.end())) ans=1;
             }
-            if(ct==2){
-                ans=5;
+            if(ans==1) {
+                //cout << i << '\n' ;
+                ct++; s1.clear(); s2.clear(); 
+            }
+
+            if(ans==0){
+                s1.insert(v[i]+k+1); s2.insert(v[i]-k-1);
             }
         }
-        if(ans==0) ans=6;
 
-        cout << ans << '\n' ;
+        cout << ct << '\n' ;
     }
+
 
 
 

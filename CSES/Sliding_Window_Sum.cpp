@@ -19,7 +19,7 @@ ll gcd(ll a,ll b){
 void debug(const vector<ll>& v){
     cerr << "[ ";
     for(auto j : v) cerr << j << ' ';
-    cerr << "]\n" ; return ;
+    cerr << "]\n"; return ;
 }
 signed main()
 {
@@ -27,9 +27,28 @@ signed main()
     cin.tie(NULL);
 
 
-    ll t; cin >> t;
+    ll t; t=1;
     while(t--){
-        
+        ll n,k ; cin >> n >> k;
+        ll x,a,b,c; cin >>x >> a >>b >> c; 
+        vector<ll> v(n+1 ,0);
+        v[1]=x;
+        for(ll i=2;i<=n;i++){
+            v[i] = (a*v[i-1] + b)%c;
+        }
+        ll ans=0 , fst=0;
+        for(ll i=1;i<=k;i++){
+            fst += v[i];
+        }
+        ans=fst;
+        //cout << fst << '\n' ;
+        for(ll i=k+1;i<=n;i++){
+            fst += v[i];
+            fst -= v[i-k];
+            ans ^= fst;
+        }
+
+        cout << ans << '\n' ;
     }
 
 

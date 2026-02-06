@@ -24,41 +24,26 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    ll t; t=1;
-    while(t--){
-        ll n; cin >> n;
-        vector<ll> v1(n) , v2(n);
-        vector<ll> s1(n) , s2(n);
-        for(auto &i : v1) cin >> i;
-        for(auto &i : v2) cin >> i;
+    // dp[i][1] = up until maximum sum of heights such that ahead we can take height from row1
+    // dp[i][2] = up until maximum sum of heights such that ahead we can take height from row2
 
-        
-        for(ll i=n-1;i>=0;i--){
-            if(i==n-1) {
-                s1[i]=v1[i];
-                s2[i]=v2[i];
-            }
-            else
-            {s1[i]=s2[i+1]+v1[i];
-            s2[i]=s1[i+1]+v2[i];}
-            
-            
-        }
-        ll ans=0;
-        ll ptr;
-        if(s1[0]>s2[0]) ptr=1;
-        else ptr=2;
-        bool sk = false;
-        for(ll i=0;i<n;i++){
-            if(i!=n-1 && ptr==1 && s1[i+1]>s1[i]) sk = true;// ptr remains unchanged
-            else if(i!=n-1 && ptr==2 && s2[i+1]>s2[i]) sk = true;// ptr remains unchanged
-            
-            if(ptr==1 && !sk) {ans+=v1[i];ptr=2;}
-            else if(ptr==2 && !sk) {ans+=v2[i];ptr=1;}
-            sk = false;
-        }
-        cout << ans << '\n' ;
+    // dp[i][1] = max(h2[i]+dp[i-1][2] , dp[i-1][1])
+    // dp[i][2] = max(h1[i]+dp[i-1][1] , dp[i-1][2])
+
+
+    ll n; cin >> n;
+    vector<ll> a(n+1) , b(n+1);
+    for(ll i=1;i<=n;i++) cin >> a[i];
+    for(ll i=1;i<=n;i++) cin >> b[i];
+    vector<vector<ll>> dp(n+1 , vector<ll> (3 ,0));
+    dp[1][1]=b[1];
+    dp[1][2]=a[1];
+    for(ll i=2;i<=n;i++){
+        dp[i][1] = max(b[i]+dp[i-1][2] , dp[i-1][1]);
+        dp[i][2] = max(a[i]+dp[i-1][1] , dp[i-1][2]);
     }
+
+    cout << max(dp[n][1] , dp[n][2]);
 
 
     return 0;
