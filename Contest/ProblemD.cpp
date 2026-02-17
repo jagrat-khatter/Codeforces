@@ -29,32 +29,32 @@ signed main()
 
     ll t; cin >> t;
     while(t--){
-        ll n,k ; cin >> n >> k;
-        vector<ll> v(n+1); 
+        ll n; cin >> n;
+        vector<ll> v(n+1);
+
+        vector<ll> elms(n+1 , -1);
+        vector<ll> diffs;
         for(ll i=1;i<=n;i++){
             cin >> v[i];
+            if(i>1) diffs.push_back(v[i] - v[i-1]);
         }
-        set<ll> s1={v[1]+k+1},s2={v[1]-k-1};
-
-        ll ct=0;
-        for(ll i=2;i<=n;i++){
-            ll ans=0;
-            if(s1.size()){
-                
-                if(v[i]>=*(s1.begin())) ans=1;
-                else if(v[i]<=*(--s2.end())) ans=1;
-            }
-            if(ans==1) {
-                //cout << i << '\n' ;
-                ct++; s1.clear(); s2.clear(); 
-            }
-
-            if(ans==0){
-                s1.insert(v[i]+k+1); s2.insert(v[i]-k-1);
-            }
+        for(ll i=1;i<diffs.size();i++){
+            elms[i+1] = (diffs[i] - diffs[i-1])/2;
         }
-
-        cout << ct << '\n' ;
+        elms[n] = v[1];
+        for(ll i=2;i<=n-1;i++){
+            elms[n] -= (i-1)*(elms[i]);
+        }
+        elms[n] /= (n-1);
+        elms[1] = v[n];
+        
+        for(ll i=2;i<=n-1;i++){
+            elms[1] -= (n-i)*(elms[i]);
+        }
+        elms[1] /= (n-1);
+        for(ll i=1;i<=n;i++) cout << elms[i] << ' ';
+        cout << '\n' ;
+        
     }
 
 

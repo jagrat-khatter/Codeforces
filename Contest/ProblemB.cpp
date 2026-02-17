@@ -30,25 +30,48 @@ signed main()
     ll t; cin >> t;
     while(t--){
         ll n; cin >> n;
-        string s; cin >> s;
-        vector<ll> v(26+1 ,0);
-        for(auto j : s){
+        vector<ll> v(n+1);
+        set<ll> s;
+        for(ll i=1;i<=n;i++){
+            cin >> v[i]; s.insert(i);
+        }
+        bool ans = true;
+        set<ll> rem;
+        for(auto j: s){
+            if(rem.find(j)!=rem.end()) continue;
+            set<ll> ids;
+            ll id = j;
+            set<ll> vals;
+            while(id<=n){
+                ids.insert(id);
+                vals.insert(v[id]);
+                id *= 2;
+            }
+            for(auto k : vals){
+                //cout << j << ' ' << k << '\n' ;
+                ll ct = k;
+                while(ct%2==0){
+                    ct /= 2;
+                }
+
+                if(ct!=j) {ans=false; //cout << j << ' ' << k << '\n' ;
+                    break;}
+            }
+            //cout << j << '\n';
+            // for(auto k : ids)  cout << k << ' ';
+            // cout << '\n' ;
+            // for(auto k : s)  cout << k << ' ';
+            // cout << '\n' ;
             
-            ll ct ;
-            if((ll)(j)<97) ct = (ll)(j) - 65 + 1;
-            else ct = (ll)(j) - 97 + 1;
-            v[ct]++;
+            if(ans==false) break;
+            for(auto k : ids) rem.insert(k);
+            // for(auto k : s)  cout << k << ' ';
+            // cout << '\n' ;
+            if(ans==false) break;
         }
 
-        multiset<ll> st;
-        for(auto j : v) {
-            //cout << j << ' ';
-            if(j>0) st.insert(j);
-        }
-        //cout << *(--st.end())<< ' ' << *(--(--st.end())) << '\n' ;
-        if(st.size()==1) cout << *(--st.end());
-        else cout  << ((*(--st.end())) + (*(--(--st.end()))) );
-        cout << '\n' ;
+        if(ans==true) cout << "YES\n";
+        else cout << "NO\n" ;
     }
 
 

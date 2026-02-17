@@ -18,7 +18,7 @@ ll gcd(ll a,ll b){
 }
 void debug(const vector<ll>& v){
     cerr << "[ ";
-    for(auto j : v) cerr << j << ' ';
+    for(auto  j : v) cerr << j << ' ';
     cerr << "]\n" ; return ;
 }
 signed main()
@@ -26,18 +26,27 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-
     ll t; cin >> t;
     while(t--){
-        ll n; cin >> n;
-        ll ans = 0;
-        for(ll i=1;i<=n;i++){
-            ll x; cin >> x;
-            if(x==67) ans=1;
+        ll x , y; cin >> x >> y;
+        ll cx = x, cy = y;
+        vector<ll> vx,vy;
+        while(cx || cy){
+            vx.push_back(cx%2) ; cx /= 2;
+            vy.push_back(cy%2) ; cy /= 2;
         }
-
-        if(ans) cout << "YES\n";
-        else cout << "NO\n" ;
+        vx.push_back(0);
+        vy.push_back(0);
+        reverse(vx.begin() , vx.end());
+        reverse(vy.begin() , vy.end());
+ 
+        // for(auto j : vx) cout << j << ' ';
+        // cout << '\n';
+        // for(auto j : vy) cout << j << ' ';
+        // cout << '\n' ;
+        if(x == y) cout << - 1<< '\n';
+        else cout << (((ll)1 << 36) - min(x , y)) << '\n' ;
+        
     }
 
 

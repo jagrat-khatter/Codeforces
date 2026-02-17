@@ -27,7 +27,20 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    
+    ll n ,x; cin >> n >> x;
+    vector<ll> v(n+1 ,0);
+    for(ll i=1;i<=n;i++){
+        cin >> v[i];
+    }
+    sort(v.begin() , v.end());
+    ll ct=0;
+    ll p1=1,p2=n;
+    while(p1<=p2){
+        if(v[p2]+v[p1] <= x) {ct++; p1++;p2--;}
+        else {ct++; p2--;}
+    }
+
+    cout << ct << '\n' ;
 
     return 0;
 }

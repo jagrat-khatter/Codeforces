@@ -29,14 +29,31 @@ signed main()
 
     ll t; cin >> t;
     while(t--){
-        ll b,g,x,y,n; cin >> b >> g >> x>> y >> n;
-        ll rooms = (b+g+n-1)/n ;
-        bool ans=true;
-        if(rooms*x<=b && rooms*y<=g) ans=true;
-        else ans=false;
+        ll n ; cin >> n;
+        vector<ll> v(n+1);
+        for(ll i=1;i<=n;i++){
+            cin >> v[i];
+        }
+        ll ct=0;
+        for(ll i=2;i<=n;i++){
+            if((v[i]==1 && v[i-1]==6) || (v[i]==6 && v[i-1]==1) || (v[i]==1 && v[i-1]==1) || (v[i]==6 && v[i-1]==6)){
+                if(i+1<=n && (v[i+1]==2 || v[i+1]==5)) v[i]=3;
+                else v[i]=5;
+                ct++;
+            }
+            else if((v[i]==2 && v[i-1]==5) || (v[i]==5 && v[i-1]==2) || (v[i]==5 && v[i-1]==5) || (v[i]==2 && v[i-1]==2)){
+                if(i+1<=n && (v[i+1]==1 || v[i+1]==6)) v[i]=3;
+                else v[i]=1;
+                ct++;
+            }
+            else if((v[i]==3 && v[i-1]==4) || (v[i]==4 && v[i-1]==3) || (v[i]==3 && v[i-1]==3) || (v[i]==4 && v[i-1]==4)){
+                if(i+1<=n && (v[i+1]==1 || v[i+1]==6)) v[i]=5;
+                else v[i]=1;
+                ct++;
+            }
+        }
 
-        if(ans) cout << rooms << '\n';
-        else cout << -1 << '\n' ;
+        cout << ct << '\n' ;
     }
 
 

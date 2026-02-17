@@ -10,7 +10,7 @@ const ll MOD = 1e9 + 7;
 ll power(ll b,ll e){
     if(e==0) return 1;
     ll value = power(b , e/2);
-    return value*value*((e%2==0) ? 1 : b);
+    return value*value*((e%2==0));
 }
 ll gcd(ll a,ll b){
     if(b==0) return a;
@@ -23,23 +23,31 @@ void debug(const vector<ll>& v){
 }
 signed main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
+
+    ll n; cin >> n;
+    vector<ll> ist(n);
+    iota(ist.begin() , ist.end() , 1);
+
+    stable_sort(ist.begin() , ist.end() , [](ll i,ll j){
+        cout << "? " << i << ' ' << j << endl;
+        string res; cin >> res;
+        return (res == "YES");
+    });
 
 
-    ll t; cin >> t;
-    while(t--){
-        ll n; cin >> n;
-        ll ans = 0;
-        for(ll i=1;i<=n;i++){
-            ll x; cin >> x;
-            if(x==67) ans=1;
-        }
-
-        if(ans) cout << "YES\n";
-        else cout << "NO\n" ;
+        
+    
+    cout << "! " ; 
+    ll i=1;
+    vector<ll> ans(n+1);
+    for(auto j : ist){
+        ans[j] = i;
+        i++;
     }
 
+    for(ll i=1;i<=n;i++) cout << ans[i] << ' ';
+    cout << '\n' ;
+    
 
 
 

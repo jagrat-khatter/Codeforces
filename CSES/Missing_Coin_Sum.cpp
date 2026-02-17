@@ -27,7 +27,20 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    
+    ll n; cin >> n;
+    vector<ll> v(n+1);
+    v[0]=0;
+    for(ll i=1;i<=n;i++) cin >> v[i];
+    sort(v.begin() , v.end());
+    sort(v.begin() , v.end());
+
+    ll target = 1 ;
+    for(ll i=1;i<=n;i++){
+        if(v[i]<=target) target += v[i];
+        else {break;}// this target cannot be achieved
+    }
+
+   cout << target << '\n' ;
 
     return 0;
 }

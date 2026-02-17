@@ -1,12 +1,7 @@
 #include <bits/stdc++.h>
-#include <ext/pb_ds/assoc_container.hpp> 
-#include <ext/pb_ds/tree_policy.hpp> 
-using namespace __gnu_pbds;
 using namespace std;
-using ll = long long ;
+using ll = long long;
 using ld = long double;
-typedef tree<pair<int, int>, null_type, less<pair<int, int>>, rb_tree_tag, 
-             tree_order_statistics_node_update> ordered_set;
 const ll lmin = LLONG_MIN;
 const ll lmax = LLONG_MAX;
 const ll imin = INT_MIN;
@@ -19,21 +14,36 @@ ll power(ll b,ll e){
 }
 ll gcd(ll a,ll b){
     if(b==0) return a;
-    else return gcd(b ,a%b);
+    else return gcd(b , a%b);
 }
 void debug(const vector<ll>& v){
-    cerr << "[ ";
-    for(auto j : v) cerr << j << ' ';
-    cerr << "]\n" ;return;
+    cerr << "[ " ;
+    for(auto j : v) cerr << j << ' ' ;
+    cerr << "]\n" ;
 }
 signed main()
 {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    vector<ll> v={1,2,3,9,7,3,6,23};
+    ll t; t=1;
+    while(t--){
+        ll n; cin >> n;
+        vector<ll> v(n+1);
+        map<ll,ll> mp;
+        ll ans=0;
+        for(ll i=1;i<=n;i++) {
+            ll x; cin >> x;
+            mp[x]++;
+            if(mp[x]==1) ans++;
+        }
+        
+        
+        cout << ans << '\n' ;
+        
+    }
 
-    cout << v.back() ;
+
 
 
     return 0;

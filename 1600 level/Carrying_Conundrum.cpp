@@ -72,7 +72,7 @@ signed main()
                 else dp[i][1] = pr1(val)*dp[i-2][1];
                 dp[i][0] = (pr1(e)*dp[i-2][0] + pr2(e)*dp[i-2][1]) ;
             }
-
+            
             //cout << i <<' ' <<dp[i][0] << ' ' << dp[i][1] << '\n' ;
         }
 

@@ -16,30 +16,34 @@ ll gcd(ll a,ll b){
     if(b==0) return a;
     else return gcd(b , a%b);
 }
-void debug(const vector<ll>& v){
+void debig(const vector<ll>& v){
     cerr << "[ ";
     for(auto j : v) cerr << j << ' ';
     cerr << "]\n" ; return ;
+}
+bool comparator(pair<ll,ll> a,pair<ll,ll> b){
+    if(a.first != b.first) return (a.first < b.first);
+    else return (a.second>b.second);
 }
 signed main()
 {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-
-    ll t; cin >> t;
-    while(t--){
-        ll n; cin >> n;
-        ll ans = 0;
-        for(ll i=1;i<=n;i++){
-            ll x; cin >> x;
-            if(x==67) ans=1;
+    ll n; cin >> n;
+    
+    multiset<ll> s;
+    for(ll i=1;i<=n;i++){
+        ll e; cin >> e;
+        auto it = s.upper_bound(e);// finds the smallest element that is striclty greater than x
+        if(it == s.end()) {s.insert(e);}
+        else {
+            s.erase(it); s.insert(e);
         }
-
-        if(ans) cout << "YES\n";
-        else cout << "NO\n" ;
     }
 
+    cout << s.size() << '\n' ;
+    
 
 
 

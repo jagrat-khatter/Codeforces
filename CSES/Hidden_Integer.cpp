@@ -24,10 +24,19 @@ void debug(const vector<ll>& v){
 }
 signed main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-
     
+
+    ll l=1-1 , r=1e9+1;
+    while(r-1>l){
+        ll mid = (l+r)/2;
+        cout << "? " << mid  << endl;
+        string s; cin >> s;
+        if(s=="YES") l=mid;
+        else r=mid;
+    }
+
+    cout << "! " << r << endl  ;
+
 
     return 0;
 }

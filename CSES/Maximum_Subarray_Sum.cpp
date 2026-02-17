@@ -27,7 +27,18 @@ signed main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
+    ll n; cin >> n;
+    ll currs = imin;
+    ll ans = imin;
+    for(ll i=1;i<=n;i++){
+        ll x; cin >> x;
+        currs = max(currs+x , x);
+        ans = max(currs , ans);// at every stage we consider that this can be maximum
+    }
+
+    cout << ans << '\n' ;
     
+
 
     return 0;
 }
